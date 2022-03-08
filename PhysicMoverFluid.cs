@@ -34,8 +34,9 @@ public class PhysicMoverFluid : MonoBehaviour
         if (transform.position.y < 0)
         {
             // Calculate the "fluid friction" force
-            Vector3 fluidFriction = ((velocity.magnitude * velocity.magnitude) * frontalArea 
-                * -coeficienteF * velocity.normalized) / 2;
+            float speed = velocity.magnitude;
+            float fluidFrictionScalarPart = -1f / 2f * speed * speed * frontalArea * coeficienteF;
+            Vector3 fluidFriction = fluidFrictionScalarPart * velocity.normalized;
             ApplyForce(fluidFriction);
         }
 
